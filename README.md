@@ -425,7 +425,7 @@ Build an interactive web dashboard for predictions
 
 **Running the Code**
 
-**1. Clone or download** the project folder: git clone https://github.com/<your-username>/lung-cancer-survey.git
+**1. Clone or download** the project folder: git clone https://github.com/Holymichael99/lung-cancer-survey.git
 **2. Ensure the dataset** survey lung cancer.csv is in the same directory as the script or notebook.
 **3. Install required packages** using pip if not already installed:  pip install pandas matplotlib seaborn scikit-learn
 
