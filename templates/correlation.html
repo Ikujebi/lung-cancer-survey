@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Correlation Heatmap</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Correlation Heatmap</h1>
+
+    {% if corr_path %}
+        <img src="{{ url_for('static', filename=corr_path.split('static/')[-1]) }}" width="800">
+    {% endif %}
+
+    <p><a class="btn" href="/">Back to Home</a></p>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descriptive Statistics</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+</head>
+<body>
+   
+
+<h2>Descriptive Statistics</h2>
+
+<!-- Summary Statistics Table -->
+<h3>Summary Statistics</h3>
+<table class="stats-table">
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Total <br> Entries</th>
+            <th>Average</th>
+            <th>Variability</th>
+            <th>Min</th>
+            <th>25%</th>
+            <th>50%</th>
+            <th>75%</th>
+            <th>Max</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for feature, values in desc_stats.desc_stats.items() %}
+        <tr>
+            <td>{{ feature }}</td>
+            <td>{{ values['count']|round(2) }}</td>
+            <td>{{ values['mean']|round(2) }}</td>
+            <td>{{ values['std']|round(2) }}</td>
+            <td>{{ values['min'] }}</td>
+            <td>{{ values['25%'] }}</td>
+            <td>{{ values['50%'] }}</td>
+            <td>{{ values['75%'] }}</td>
+            <td>{{ values['max'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3 class="grouped-title">Grouped Summary</h3>
+
+{% for group, features in desc_stats.grouped_summary.items() %}
+<div class="group-summary">
+    <h4 class="group-summary-title">{{ group }}</h4>
+    <ul class="group-summary-list">
+        {% for feature, value in features.items() %}
+        <li class="group-summary-item">{{ feature }}: {{ value }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+
+<!-- Plots -->
+<h3>Plots</h3>
+<div class="plots-container">
+    {% for name, path in desc_stats.plots.items() %}
+    <div class="plot-card">
+        <h4>{{ name.replace('_', ' ').title() }}</h4>
+        <img src="{{ url_for('static', filename='images/' + path.split('/')[-1]) }}" alt="{{ name }}">
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Links to other pages -->
+<div class="actions">
+    <a class="btn" href="{{ url_for('correlation') }}">View Correlation Heatmap</a>
+    <a class="btn" href="{{ url_for('predict') }}">Predict Lung Cancer</a>
+</div>
+
+
+</body>
+</html>
