@@ -40,7 +40,7 @@ class MLAnalyzer:
         df_encoded = pd.get_dummies(df, columns=self.categorical_columns, drop_first=False)
 
         # Target column is already numeric (1 = Yes, 2 = No), use directly
-        y = df_encoded[target_col].map({"YES": 1, "NO": 2})
+        y = df_encoded[target_col].map({"YES": 1, "NO": 0})
         X = df_encoded.drop(target_col, axis=1)
 
         # Save feature names for later

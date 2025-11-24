@@ -11,33 +11,36 @@
     <div class="predict-container">
       <h1>Lung Cancer Prediction</h1>
       <form method="POST" class="predict-form">
-        <div class="form-group">
-          <label for="gender">Gender</label>
-          <select name="gender" id="gender">
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="age">Age</label>
-          <input id="age" type="number" name="age" required />
-        </div>
-        <div class="form-group">
-          <label for="smoking">Smoking</label>
-          <select id="smoking" name="smoking" required>
-            <option value="1">Yes</option>
-            <option value="2">No</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="coughing">Coughing</label>
-          <select id="coughing" name="coughing" required>
-            <option value="1">Yes</option>
-            <option value="2">No</option>
-          </select>
-        </div>
-        <button type="submit" class="predict-btn">Predict</button>
-      </form>
+
+  <div class="form-group">
+    <label>Gender</label>
+    <select name="gender">
+      <option value="M">Male</option>
+      <option value="F">Female</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Age</label>
+    <input type="number" name="AGE" required>
+  </div>
+
+  {% for feature in [
+    'SMOKING','YELLOW_FINGERS','ANXIETY','PEER_PRESSURE','CHRONIC_DISEASE',
+    'FATIGUE','ALLERGY','WHEEZING','ALCOHOL_CONSUMING','COUGHING',
+    'SHORTNESS_OF_BREATH','SWALLOWING_DIFFICULTY','CHEST_PAIN'
+  ] %}
+  <div class="form-group">
+    <label>{{ feature.replace("_"," ").title() }}</label>
+    <select name="{{ feature }}" required>
+      <option value="1">Yes</option>
+      <option value="2">No</option>
+    </select>
+  </div>
+  {% endfor %}
+
+  <button type="submit">Predict</button>
+</form>
       {% if result %}
       <div class="predict-result">
         <h2>Prediction Result</h2>
